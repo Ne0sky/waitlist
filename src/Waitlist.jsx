@@ -177,7 +177,7 @@ const Waitlist = () => {
 
       {/* FOOTER */}
       <footer style={styles.footer}>
-        <p>COGSECTOR © 2025</p>
+        <p>KOGSECTOR © 2025</p>
         <p style={{opacity: 0.5, fontSize: '0.8rem'}}>System Status: ONLINE</p>
       </footer>
     </div>
