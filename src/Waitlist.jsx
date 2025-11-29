@@ -1,14 +1,29 @@
 import { useState, useEffect } from 'react';
 
+// SVG Icon Component for the Circuit Brain
+const BrainChipIcon = ({ style }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={style}>
+    <rect x="4" y="4" width="16" height="16" rx="2" />
+    <path d="M9 9h6" />
+    <path d="M9 13h6" />
+    <path d="M9 17h6" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <circle cx="12" cy="12" r="2" />
+  </svg>
+);
+
 const Waitlist = () => {
   const [email, setEmail] = useState('');
   const [status, setStatus] = useState('idle'); 
   const [activeTab, setActiveTab] = useState('problem');
 
-  // Keep your API URL exactly as is
+  // API URL
   const API_URL = "https://uu4qwx2iv5.execute-api.us-east-1.amazonaws.com/join";
 
-  // Global Style Reset for full-screen dark mode
+  // Global Style Reset
   useEffect(() => {
     document.body.style.margin = '0';
     document.body.style.padding = '0';
@@ -43,11 +58,11 @@ const Waitlist = () => {
 
   return (
     <div style={styles.pageWrapper}>
-      {/* Background Grid Effect */}
+      {/* Background Grid */}
       <div style={styles.gridBackground}></div>
       <div style={styles.glowOrb}></div>
 
-      {/* NAV / HEADER */}
+      {/* NAV */}
       <nav style={styles.nav}>
         <div style={styles.logo}>KS <span style={{color: '#00F0FF'}}>.</span></div>
         <div style={styles.betaBadge}>PRIVATE BETA</div>
@@ -64,7 +79,7 @@ const Waitlist = () => {
             Stop context-switching. Start engineering with full organizational awareness.
           </p>
 
-          {/* EMAIL FORM */}
+          {/* FORM */}
           {status === 'success' ? (
             <div style={styles.successCard}>
               <span style={{fontSize: '24px'}}>🚀</span>
@@ -96,23 +111,19 @@ const Waitlist = () => {
           {status === 'error' && <p style={styles.error}>Connection failed. Retrying recommended.</p>}
         </div>
 
-        {/* HERO IMAGE / VISUAL */}
+        {/* HERO VISUAL - NEON LOGO WITH ICON */}
         <div style={styles.heroVisual}>
-           {/* Placeholder for a cool architecture diagram */}
-           <img 
-            src="/main.png" 
-            alt="System Architecture" 
-            style={styles.heroImage}
-           />
-           <div style={styles.codeOverlay}>
-             <code>&gt; connecting to repo: auth-service... OK</code><br/>
-             <code>&gt; connecting to repo: payment-api... OK</code><br/>
-             <code>&gt; context_window: OPTIMIZED</code>
+           <div style={styles.neonContainer}>
+             <div style={styles.neonWrapper}>
+                <BrainChipIcon style={styles.neonIcon} />
+                <h2 style={styles.neonHeroText}>KogSector</h2>
+             </div>
+             <div style={styles.reflection}></div>
            </div>
         </div>
       </header>
 
-      {/* TABS SECTION */}
+      {/* TABS */}
       <section style={styles.tabsSection}>
         <div style={styles.tabsHeader}>
           <button 
@@ -184,7 +195,7 @@ const Waitlist = () => {
   );
 };
 
-// --- FUTURISTIC STYLES ---
+// --- STYLES ---
 const styles = {
   pageWrapper: {
     minHeight: '100vh',
@@ -239,6 +250,7 @@ const styles = {
     justifyContent: 'space-between',
     padding: '4rem 10%',
     gap: '40px',
+    minHeight: '50vh', 
   },
   heroContent: {
     flex: '1',
@@ -307,35 +319,65 @@ const styles = {
     gap: '15px',
     color: '#00F0FF',
   },
+  
+  // --- UPDATED NEON LOGO STYLES WITH ICON ---
   heroVisual: {
     flex: '1',
     minWidth: '300px',
-    position: 'relative',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
+    height: '300px', 
   },
-  heroImage: {
-    width: '100%',
-    borderRadius: '10px',
-    border: '1px solid #333',
-    boxShadow: '0 20px 50px rgba(0,0,0,0.5)',
+  neonContainer: {
+    position: 'relative',
+    padding: '20px',
   },
-  codeOverlay: {
+  // New wrapper to align icon and text horizontally
+  neonWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '20px', // Space between icon and text
+    position: 'relative',
+    zIndex: 2,
+  },
+  // New style for the SVG icon
+  neonIcon: {
+    width: '80px',
+    height: '80px',
+    stroke: '#00F0FF', // Cyan stroke
+    filter: 'drop-shadow(0 0 10px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 20px rgba(0, 240, 255, 0.4))', // Neon glow drop-shadow
+    animation: 'flickerIcon 4s infinite alternate', // Separate flicker for icon
+  },
+  neonHeroText: {
+    fontFamily: '"Orbitron", sans-serif',
+    fontSize: '4.5rem', 
+    fontWeight: '700',
+    letterSpacing: '4px',
+    margin: 0,
+    color: 'transparent',
+    WebkitTextStroke: '2px #00F0FF',
+    textShadow: `
+      0 0 10px rgba(0, 240, 255, 0.5),
+      0 0 20px rgba(0, 240, 255, 0.3),
+      0 0 40px rgba(0, 240, 255, 0.1)
+    `,
+    animation: 'flickerText 4s infinite alternate', // Renamed animation
+  },
+  reflection: {
+    content: '""',
     position: 'absolute',
-    bottom: '-20px',
-    left: '-20px',
-    background: 'rgba(0,0,0,0.8)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid #333',
-    padding: '15px',
-    borderRadius: '8px',
-    fontFamily: 'monospace',
-    fontSize: '0.8rem',
-    color: '#00F0FF',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.5)',
+    bottom: '-30px', // Moved down slightly
+    left: '50%',
+    transform: 'translateX(-50%) scaleX(0.8)',
+    width: '120%', // Wider reflection for icon + text
+    height: '50px',
+    background: 'radial-gradient(ellipse at center, rgba(0, 240, 255, 0.2) 0%, transparent 70%)',
+    zIndex: 1,
+    filter: 'blur(15px)',
   },
-  
-  // TABS SECTION
+
+  // TABS
   tabsSection: {
     marginTop: '4rem',
     padding: '4rem 10%',
@@ -407,12 +449,41 @@ const styles = {
   }
 };
 
-// Animation for tab switching
+// Inject Font & Animations
 const styleSheet = document.createElement("style");
 styleSheet.innerText = `
+  @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&display=swap');
+
   @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Flicker for Text Shadow */
+  @keyframes flickerText {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      text-shadow:
+      0 0 10px rgba(0, 240, 255, 0.5),
+      0 0 20px rgba(0, 240, 255, 0.3),
+      0 0 40px rgba(0, 240, 255, 0.1);
+      opacity: 1;
+    }
+    20%, 24%, 55% {       
+      text-shadow: none;
+      opacity: 0.5;
+    }
+  }
+
+  /* Flicker for SVG Filter Drop-Shadow */
+  @keyframes flickerIcon {
+    0%, 18%, 22%, 25%, 53%, 57%, 100% {
+      filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.8)) drop-shadow(0 0 20px rgba(0, 240, 255, 0.4));
+      opacity: 1;
+    }
+    20%, 24%, 55% {       
+      filter: none;
+      opacity: 0.5;
+    }
   }
 `;
 document.head.appendChild(styleSheet);
