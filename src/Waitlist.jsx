@@ -49,7 +49,7 @@ const Waitlist = () => {
 
       {/* NAV / HEADER */}
       <nav style={styles.nav}>
-        <div style={styles.logo}>CS <span style={{color: '#00F0FF'}}>.</span></div>
+        <div style={styles.logo}>KS <span style={{color: '#00F0FF'}}>.</span></div>
         <div style={styles.betaBadge}>PRIVATE BETA</div>
       </nav>
 
@@ -57,10 +57,10 @@ const Waitlist = () => {
       <header style={styles.heroSection}>
         <div style={styles.heroContent}>
           <h1 style={styles.mainTitle}>
-            Connect the <span style={styles.gradientText}>Hive Mind.</span>
+            Context at <span style={styles.gradientText}>Scale.</span>
           </h1>
           <p style={styles.heroSub}>
-            <strong>CogSector</strong> is the first Multi-Repo RAG designed for Windsurf & Cursor. 
+            <strong>KogSector</strong> is the first Multi-Repo RAG designed for Windsurf & Cursor. 
             Stop context-switching. Start engineering with full organizational awareness.
           </p>
 
@@ -100,7 +100,7 @@ const Waitlist = () => {
         <div style={styles.heroVisual}>
            {/* Placeholder for a cool architecture diagram */}
            <img 
-            src="/logo_cogsector.jpg" 
+            src="/main.png" 
             alt="System Architecture" 
             style={styles.heroImage}
            />
