@@ -74,8 +74,9 @@ const Waitlist = () => {
           <h1 style={styles.mainTitle}>
             Context at <span style={styles.gradientText}>Scale.</span>
           </h1>
+          {/* UPDATED HERO TEXT */}
           <p style={styles.heroSub}>
-            <strong>KogSector</strong> is the first Multi-Repo RAG designed for Windsurf & Cursor. 
+            <strong>KogSector</strong> is the first Multi-Repo RAG for your <strong>AI Agents</strong>.
             Stop context-switching. Start engineering with full organizational awareness.
           </p>
 
@@ -123,7 +124,7 @@ const Waitlist = () => {
         </div>
       </header>
 
-      {/* TABS */}
+      {/* TABS (Removed Stack Tab) */}
       <section style={styles.tabsSection}>
         <div style={styles.tabsHeader}>
           <button 
@@ -137,12 +138,6 @@ const Waitlist = () => {
             onClick={() => setActiveTab('solution')}
           >
             02. THE SOLUTION
-          </button>
-          <button 
-            style={activeTab === 'tech' ? styles.tabActive : styles.tab} 
-            onClick={() => setActiveTab('tech')}
-          >
-            03. THE STACK
           </button>
         </div>
 
@@ -163,24 +158,9 @@ const Waitlist = () => {
               <div style={styles.textBlock}>
                 <h3>Knowledge-as-a-Service</h3>
                 <p><strong>CogSector</strong> builds a central "Knowledge Core" that indexes every repository in your organization.</p>
-                <p>When you ask Windsurf a question, we intercept it via <strong>MCP (Model Context Protocol)</strong>, fetch the relevant code from <em>any</em> repo, and feed it to the agent.</p>
+                <p>When you ask your AI Agent a question, we intercept it via <strong>MCP (Model Context Protocol)</strong>, fetch the relevant code from <em>any</em> repo, and feed it to the agent.</p>
               </div>
               <img src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_1280.jpg" style={styles.tabImage} alt="Solution" />
-            </div>
-          )}
-
-          {activeTab === 'tech' && (
-            <div style={styles.tabPane}>
-              <div style={styles.textBlock}>
-                <h3>Built for Scale</h3>
-                <ul style={styles.techList}>
-                  <li>⚡ <strong>Tree-sitter</strong> Smart Chunking</li>
-                  <li>🧠 <strong>Qwen3-Embedding</strong> Models</li>
-                  <li>🔍 <strong>Vector + Reranking</strong> Search Pipeline</li>
-                  <li>🛡️ <strong>Role-Based</strong> Security Permissions</li>
-                </ul>
-              </div>
-              <img src="https://cdn.pixabay.com/photo/2018/05/08/08/44/artificial-intelligence-3382507_1280.jpg" style={styles.tabImage} alt="Tech Stack" />
             </div>
           )}
         </div>
@@ -430,12 +410,6 @@ const styles = {
     borderRadius: '8px',
     border: '1px solid #333',
     opacity: 0.8,
-  },
-  techList: {
-    listStyle: 'none',
-    padding: 0,
-    lineHeight: '2.5',
-    color: '#aaa',
   },
   footer: {
     textAlign: 'center',
