@@ -1,6 +1,125 @@
 import { useState, useEffect } from 'react';
 
-// SVG Icon Component for the Circuit Brain
+// --- REUSABLE NEON FILTER DEFINITION ---
+const NeonFilterDefs = () => (
+  <defs>
+    {/* Increased blur for a stronger neon effect on outlines */}
+    <filter id="neon-glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur3" />
+      <feGaussianBlur in="SourceGraphic" stdDeviation="6" result="blur6" />
+      <feMerge>
+        <feMergeNode in="blur6" />
+        <feMergeNode in="blur3" />
+        <feMergeNode in="SourceGraphic" />
+      </feMerge>
+    </filter>
+    {/* Gradient only for the silo outlines now */}
+    <linearGradient id="silo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stopColor="#7000FF" />
+      <stop offset="100%" stopColor="#00F0FF" />
+    </linearGradient>
+  </defs>
+);
+
+// --- UPDATED: CONTEXT SILO SVG (No inner text/logos) ---
+const ContextSiloSVG = ({ style }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style={style} preserveAspectRatio="xMidYMid meet">
+    <NeonFilterDefs />
+    <g filter="url(#neon-glow)" strokeWidth="2" fill="none">
+      {/* Silo 1 (Left) - Empty Outline */}
+      <g transform="translate(50, 50)">
+        {/* Removed fill, added url(#silo-gradient) to stroke */}
+        <rect x="0" y="0" width="80" height="120" rx="10" stroke="url(#silo-gradient)" />
+        <path d="M20 30h40 M20 50h40 M20 70h20" stroke="#7000FF" opacity="0.5" />
+      </g>
+      
+      {/* Silo 2 (Middle) - Empty Outline */}
+      <g transform="translate(160, 50)">
+        <rect x="0" y="0" width="80" height="120" rx="10" stroke="url(#silo-gradient)" />
+        <path d="M20 30h40 M20 50h40 M20 70h20" stroke="#7000FF" opacity="0.5" />
+      </g>
+
+      {/* Silo 3 (Right) - Empty Outline */}
+      <g transform="translate(270, 50)">
+        <rect x="0" y="0" width="80" height="120" rx="10" stroke="url(#silo-gradient)" />
+        <path d="M20 30h40 M20 50h40 M20 70h20" stroke="#7000FF" opacity="0.5" />
+      </g>
+
+      {/* Broken Connections */}
+      <path d="M130 110 h30" stroke="#FF0055" strokeDasharray="5,5" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" repeatCount="indefinite" />
+      </path>
+      <path d="M240 110 h30" stroke="#FF0055" strokeDasharray="5,5" opacity="0.8">
+        <animate attributeName="opacity" values="0.8;0.2;0.8" dur="2s" begin="1s" repeatCount="indefinite" />
+      </path>
+      
+      {/* "X" Marks */}
+      <path d="M140 105 l10 10 M150 105 l-10 10" stroke="#FF0055" strokeWidth="3" />
+      <path d="M250 105 l10 10 M260 105 l-10 10" stroke="#FF0055" strokeWidth="3" />
+    </g>
+  </svg>
+);
+
+// --- UPDATED: KNOWLEDGE LAYER SVG (Outline Only, No Fills) ---
+const KnowledgeLayerSVG = ({ style }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" style={style} preserveAspectRatio="xMidYMid meet">
+    <NeonFilterDefs />
+    <g filter="url(#neon-glow)" fill="none">
+      {/* Connecting Lines */}
+      <g stroke="#00F0FF" strokeWidth="1" opacity="0.5">
+        <path d="M200 150 L 80 80" /><path d="M200 150 L 320 80" />
+        <path d="M200 150 L 80 220" /><path d="M200 150 L 320 220" />
+        <path d="M200 150 L 200 50" /><path d="M200 150 L 200 250" />
+      </g>
+
+      {/* Central Core - OUTLINE ONLY */}
+      <g transform="translate(200, 150)">
+        {/* Outer shell - changed from fill to stroke */}
+        <circle r="50" stroke="#00F0FF" strokeWidth="1" opacity="0.6" />
+        <circle r="40" stroke="#00F0FF" strokeWidth="3" />
+        <circle r="25" stroke="#00F0FF" strokeWidth="2" />
+        <animateTransform attributeName="transform" type="scale" values="1;1.05;1" dur="3s" repeatCount="indefinite" additive="sum"/>
+      </g>
+
+      {/* Connected Nodes - OUTLINE ONLY */}
+      {/* Node 1 (Top Left) */}
+      <g transform="translate(80, 80)">
+        <circle r="25" stroke="#00F0FF" strokeWidth="2" /> { /* Removed fill="#000" */ }
+        {/* Text converted to outline using stroke and fill="none" */}
+        <text x="0" y="5" fill="#ffffffff" stroke="none" strokeWidth="0.5" fontSize="8" fontFamily="Orbitron" textAnchor="middle">REPO A</text>
+      </g>
+      {/* Node 2 (Top Right) */}
+      <g transform="translate(320, 80)">
+        <circle r="25" stroke="#00F0FF" strokeWidth="2" />
+        <text x="0" y="5" fill="#ffffffff" stroke="none"  fontSize="8" fontFamily="Orbitron" textAnchor="middle">REPO B</text>
+      </g>
+      {/* Node 3 (Bottom Left) */}
+      <g transform="translate(80, 220)">
+        <circle r="25" stroke="#00F0FF" strokeWidth="2" />
+        <text x="0" y="5" fill="#ffffffff" stroke="none"  fontSize="8" fontFamily="Orbitron" textAnchor="middle">AGENT</text>
+      </g>
+      {/* Node 4 (Bottom Right) */}
+      <g transform="translate(320, 220)">
+        <circle r="25" stroke="#00F0FF" strokeWidth="2" />
+        <text x="0" y="5" fill="#ffffffff" stroke="none"  fontSize="8" fontFamily="Orbitron" textAnchor="middle">DOCS</text>
+      </g>
+
+      {/* Data Flow Particles (Kept fills here as they are tiny light points) */}
+      <circle r="2" fill="#FFFFFF" filter="none">
+        <animateMotion path="M80 80 L200 150" dur="2s" repeatCount="indefinite" />
+      </circle>
+      <circle r="2" fill="#FFFFFF" filter="none">
+        <animateMotion path="M320 80 L200 150" dur="2.5s" repeatCount="indefinite" />
+      </circle>
+      <circle r="2" fill="#00F0FF" filter="none">
+        <animateMotion path="M200 150 L80 220" dur="1.5s" repeatCount="indefinite" />
+      </circle>
+    </g>
+  </svg>
+);
+
+
+// --- EXISTING COMPONENTS ---
 const BrainChipIcon = ({ style }) => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={style}>
     <rect x="4" y="4" width="16" height="16" rx="2" />
@@ -48,7 +167,7 @@ const Waitlist = () => {
     {
       id: 'current_agent',
       question: "Which AI Agent are you currently using?",
-      options: ["Cursor", "Windsurf", "Github Copilot", "None"]
+      options: ["Cursor", "Windsurf", "Github Copilot", "Others","None"]
     },
     {
       id: 'context_pain',
@@ -246,7 +365,8 @@ const Waitlist = () => {
                 <p>Your AI Agents are brilliant at generating code, but they operate in a vacuum. They see the file you are editing, but they are blind to the vast knowledge hidden across your organization's codebase.</p>
                 <p>Without a central knowledge layer, you are forced to manually act as the "bridge"—finding context, copy-pasting snippets, and debugging integration issues your AI should have predicted.</p>
               </div>
-              <img src="https://cdn.pixabay.com/photo/2015/12/04/14/05/code-1076536_1280.jpg" style={styles.tabImage} alt="Problem" />
+              {/* REPLACED IMAGE WITH SVG COMPONENT */}
+              <ContextSiloSVG style={styles.tabImage} />
             </div>
           )}
 
@@ -254,10 +374,11 @@ const Waitlist = () => {
             <div style={styles.tabPane}>
               <div style={styles.textBlock}>
                 <h3>Knowledge-as-a-Service</h3>
-                <p><strong>KogSector</strong> builds a central "Knowledge Core" that indexes every repository in your organization.</p>
-                <p>When you ask your AI Agent a question, we intercept it via <strong>MCP (Model Context Protocol)</strong>,fetch the relevant code and feed it to the agent.</p>
+                <p><strong>KogSector</strong> builds a unified "Knowledge Core" that indexes your entire engineering footprint—repositories, internal documentation, wikis, and specifications.</p>
+                <p>When you query your AI Agent, we intercept it via <strong>MCP (Model Context Protocol)</strong>, retrieve the complete context—whether it's code, API references, or architectural decisions—and feed it to the agent.</p>
               </div>
-              <img src="https://cdn.pixabay.com/photo/2018/03/10/12/00/teamwork-3213924_1280.jpg" style={styles.tabImage} alt="Solution" />
+              {/* REPLACED IMAGE WITH SVG COMPONENT */}
+              <KnowledgeLayerSVG style={styles.tabImage} />
             </div>
           )}
         </div>
@@ -533,12 +654,14 @@ const styles = {
     flex: 1,
     minWidth: '300px',
   },
+  // --- UPDATED IMAGE STYLE FOR SVGs (REMOVED BORDERS/BG) ---
   tabImage: {
     flex: 1,
     minWidth: '300px',
-    borderRadius: '8px',
-    border: '1px solid #333',
-    opacity: 0.8,
+    height: 'auto',
+    maxHeight: '350px',
+    // Removed border, boxShadow, and background
+    transition: 'all 0.3s ease',
   },
   footer: {
     textAlign: 'center',
@@ -570,6 +693,13 @@ styleSheet.innerText = `
   button:hover {
      border-color: #00F0FF !important;
      background: rgba(0, 240, 255, 0.1) !important;
+  }
+
+  /* Updated hover effect for SVG container */
+  svg:hover {
+    /* Removed drop-shadow on hover to keep it clean */
+    transform: scale(1.02);
+    transition: all 0.3s ease;
   }
 
   @keyframes flickerText {
