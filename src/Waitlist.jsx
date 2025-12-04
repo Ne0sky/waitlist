@@ -227,7 +227,7 @@ const Waitlist = () => {
             <div style={styles.tabPane}>
               <div style={styles.textBlock}>
                 <h3>The "Context Silo"</h3>
-                <p>Your AI Agents are brilliant at generating code, but they operate in a vacuum. They see the file you are editing, but they are blind to the vast knowledge hidden across your organization's codebase.</p>
+                <p>Your AI Agents are brilliant at generating code, but they operate in a vacuum. They see the file you are editing, but they are blind to the vast knowledge hidden across your organization.</p>
                 <p>Without a central knowledge layer, you are forced to manually act as the "bridge"—finding context, copy-pasting snippets, and debugging integration issues your AI should have predicted.</p>
               </div>
               <ContextSiloSVG style={styles.tabImage} />
